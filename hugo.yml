@@ -41,4 +41,7 @@ menu:
       params:
         icon: brand-github
 
-
+markup:
+  goldmark:
+    renderer:
+      unsafe: True
