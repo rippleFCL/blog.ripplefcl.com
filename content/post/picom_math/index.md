@@ -21,7 +21,7 @@ but i assure you this is fun! ~~hopfully~~.
 So to begin, after alot of tinkering with fading, transparency and the myriad of other settings in picom. One thing became
 very apparent, its features wierdly conflict. good example of this is fading:
 
-```conf
+```text {linenos=inline}
 #################################
 #           Fading              #
 #################################
@@ -52,7 +52,7 @@ no-fading-openclose = false
 
 turning this setting on seams to equate to these 'animation scripts':
 
-```conf
+```text {linenos=inline}
 animations = ({
         triggers = [ "open" ];
         preset = "appear";
@@ -84,7 +84,7 @@ so the preset appear/disappear are just fading opacity of the window from 0-100 
 (minimising/switching virtual desktops). the open/close/show/hide triggers mimic the fading option.
 now, problems begin when i attempted to use window rules to make unfocused windows slightly transparent.
 
-```conf
+```text {linenos=inline}
 rules = (
     {
     match = "focused";
@@ -106,7 +106,7 @@ the result is when a window opens its instantly focused and so no animation play
 
 the solution I came up with was to impliment "fading but better" myself:
 
-```conf {linenos=inline}
+```text {linenos=inline}
 animations = ({
         triggers = [ "open" ];
         preset = "appear";
@@ -144,6 +144,30 @@ animations = ({
 ```
 
 so the main fixes is attach a fading animation to opacity changes then blocking that animation when the window open/closes/shows/hides. This looks good 10/10.
+This is a big plus for doing all animations yourself non of the in built animations toggles have the suppression section so nothing quite works correctly together
 
-## The maths, The code and the problem
+# The maths, The code and the problem
+
+## The problem
+
+so the problem i ran into and why im writing this blog post is picom animations for moving, resizing, and dragging windows in bspwm.
+now this sounds easy till you realise picom dosnt have specific triggers for resizing or moving windows, it all has to be done by the same animation.
+
+so my first thought was just use the preset animation `geometry`:
+
+```text {linenos=inline}
+animations =({
+    ...
+    triggers = [ "geometry" ];
+    preset = "geometry-change";
+})
+```
+
+Now i would show you a video of the result of this, however i cannot be bothered so i shall explain instead. so this function is constant time no matter how small the move or tiny the window geometry changes it will always take how ever long you tell it.
+
+this sounds fine and it is for moving window positions on screen. but it absoulty breaks resizing windows. as you drag a window it triggers this animation many times a second and of course it take x amount of seconds to finish that animation of the tiny move. this leads to resizing lagging heavily behind where your mouse is, it just looks horrible and feels mushy.
+
+What we need is a time funtion that scales relative to how big the move is.
+
+## The code
 
