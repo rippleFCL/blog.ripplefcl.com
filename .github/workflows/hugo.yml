@@ -70,6 +70,40 @@ jobs:
             --templateMetrics \
             --templateMetricsHints
 
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          ref: 'draft'
+          fetch-depth: 0
+
+      - name: Extract draft branch name
+        id: extract_draft_branch
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+
+      # Thanks https://github.com/peaceiris/actions-hugo
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.HUGO_CACHEDIR }}
+            ${{ env.HUGO_RESOURCEDIR }}
+          key: ${{ runner.os }}-hugo-cache-${{ steps.extract_draft_branch.outputs.branch }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-cache-
+
+      - name: Build draft with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          TZ: Europe/London
+        run: |
+          hugo \
+            --baseURL "${{ steps.pages.outputs.base_url }}/draft" \
+            --minify \
+            --gc \
+            --logLevel debug \
+            --templateMetrics \
+            --templateMetricsHints
+            --publishDir ${{ env.HUGO_PUBLISHDIR }}/draft
+
       - uses: actions/upload-pages-artifact@v3
         with:
           name: ${{ env.ARTEFACT_NAME }}
@@ -84,7 +118,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/draft') && github.event_name == 'push'
     steps:
       - uses: actions/deploy-pages@v4
         id: deployment
