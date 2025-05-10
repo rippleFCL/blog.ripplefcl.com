@@ -102,7 +102,7 @@ jobs:
             --logLevel debug \
             --templateMetrics \
             --templateMetricsHints
-            --publishDir ${{ env.HUGO_PUBLISHDIR }}/draft
+            --destination "${{ env.HUGO_PUBLISHDIR }}/draft"
 
       - uses: actions/upload-pages-artifact@v3
         with:
