@@ -52,9 +52,9 @@ jobs:
           path: |
             ${{ env.HUGO_CACHEDIR }}
             ${{ env.HUGO_RESOURCEDIR }}
-          key: ${{ runner.os }}-hugo-cache-${{ steps.extract_branch.outputs.branch }}
+          key: ${{ runner.os }}-hugo-cache-main-${{ steps.extract_branch.outputs.branch }}
           restore-keys: |
-            ${{ runner.os }}-hugo-cache-
+              ${{ runner.os }}-hugo-cache-main-
 
       - uses: actions/configure-pages@v5
         id: pages
@@ -70,7 +70,8 @@ jobs:
             --gc \
             --logLevel debug \
             --templateMetrics \
-            --templateMetricsHints
+            --templateMetricsHints \
+            --destination "${{ env.HUGO_PUBLISHDIR }}/"
 
       - name: Pull draft branch
         run: |
@@ -87,9 +88,9 @@ jobs:
           path: |
             ${{ env.HUGO_CACHEDIR }}
             ${{ env.HUGO_RESOURCEDIR }}
-          key: ${{ runner.os }}-hugo-cache-${{ steps.extract_draft_branch.outputs.branch }}
+          key: ${{ runner.os }}-hugo-cache-draft-${{ steps.extract_draft_branch.outputs.branch }}
           restore-keys: |
-            ${{ runner.os }}-hugo-cache-
+            ${{ runner.os }}-hugo-cache-draft-
 
       - name: Build draft with Hugo
         env:
@@ -97,13 +98,13 @@ jobs:
           TZ: Europe/London
         run: |
           hugo \
-            --baseURL "${{ steps.pages.outputs.base_url }}/draft" \
+            --baseURL "${{ steps.pages.outputs.base_url }}/draft/" \
             --minify \
             --gc \
             --logLevel debug \
             --templateMetrics \
             --templateMetricsHints \
-            --destination "${{ env.HUGO_PUBLISHDIR }}/draft"
+            --destination "${{ env.HUGO_PUBLISHDIR }}/draft/"
 
       - uses: actions/upload-pages-artifact@v3
         with:
