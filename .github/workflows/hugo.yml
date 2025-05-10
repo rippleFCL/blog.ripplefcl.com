@@ -72,11 +72,10 @@ jobs:
             --templateMetrics \
             --templateMetricsHints
 
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          ref: 'draft'
-          fetch-depth: 0
+      - name: Pull draft branch
+        run: |
+          git fetch origin draft
+          git checkout draft
 
       - name: Extract draft branch name
         id: extract_draft_branch
