@@ -101,7 +101,7 @@ jobs:
             --gc \
             --logLevel debug \
             --templateMetrics \
-            --templateMetricsHints
+            --templateMetricsHints \
             --destination "${{ env.HUGO_PUBLISHDIR }}/draft"
 
       - uses: actions/upload-pages-artifact@v3
