@@ -82,20 +82,20 @@ jobs:
         id: extract_draft_branch
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
-      - name: Build draft with Hugo
-        env:
-          HUGO_ENVIRONMENT: production
-          TZ: Europe/London
-        run: |
-          mkdir -p "${{ env.HUGO_PUBLISHDIR }}/draft/"
-          hugo \
-            --baseURL "${{ steps.pages.outputs.base_url }}/draft/" \
-            --minify \
-            --gc \
-            --logLevel debug \
-            --templateMetrics \
-            --templateMetricsHints \
-            --destination "${{ env.HUGO_PUBLISHDIR }}/draft/"
+      # - name: Build draft with Hugo
+      #   env:
+      #     HUGO_ENVIRONMENT: production
+      #     TZ: Europe/London
+      #   run: |
+      #     mkdir -p "${{ env.HUGO_PUBLISHDIR }}/draft/"
+      #     hugo \
+      #       --baseURL "${{ steps.pages.outputs.base_url }}/draft/" \
+      #       --minify \
+      #       --gc \
+      #       --logLevel debug \
+      #       --templateMetrics \
+      #       --templateMetricsHints \
+      #       --destination "${{ env.HUGO_PUBLISHDIR }}/draft/"
 
       - name: Print Folder Tree
         uses: jaywcjlove/github-action-folder-tree@main
