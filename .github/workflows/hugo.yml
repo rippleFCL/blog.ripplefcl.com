@@ -64,14 +64,14 @@ jobs:
           HUGO_ENVIRONMENT: production
           TZ: Europe/London
         run: |
-          hugo --help\
-            # --baseURL "${{ steps.pages.outputs.base_url }}/" \
-            # --minify \
-            # --gc \
-            # --logLevel debug \
-            # --templateMetrics \
-            # --templateMetricsHints \
-            # --destination "public_main"
+          hugo \
+            --baseURL "${{ steps.pages.outputs.base_url }}/" \
+            --minify \
+            --gc \
+            --logLevel debug \
+            --templateMetrics \
+            --templateMetricsHints \
+            --destination "./public_main/"
 
       - name: Pull draft branch
         run: |
@@ -94,7 +94,7 @@ jobs:
             --logLevel debug \
             --templateMetrics \
             --templateMetricsHints \
-            --destination "public_draft"
+            --destination "./public_draft/"
 
       - name: Print Folder Tree
         uses: jaywcjlove/github-action-folder-tree@main
