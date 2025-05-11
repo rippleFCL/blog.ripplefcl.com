@@ -28,7 +28,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.140.2
+      HUGO_VERSION: 0.147.1
       HUGO_CACHEDIR: /tmp/hugo_cache
       HUGO_RESOURCEDIR: /tmp/hugo_resources
     steps:
@@ -81,16 +81,6 @@ jobs:
       - name: Extract draft branch name
         id: extract_draft_branch
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-
-      # Thanks https://github.com/peaceiris/actions-hugo
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.HUGO_CACHEDIR }}
-            ${{ env.HUGO_RESOURCEDIR }}
-          key: ${{ runner.os }}-hugo-cache-draft-${{ steps.extract_draft_branch.outputs.branch }}
-          restore-keys: |
-            ${{ runner.os }}-hugo-cache-draft-
 
       - name: Build draft with Hugo
         env:
