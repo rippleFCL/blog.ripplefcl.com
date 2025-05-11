@@ -1,6 +1,6 @@
 +++
 date = '2025-04-30T16:54:05+01:00'
-draft = true
+draft = false
 title = 'Using the power of maths to fix picom'
 tags = [
     "maths",
