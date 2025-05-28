@@ -1,0 +1,1 @@
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q+++ date = '2025-04-30T16:54:05+01:00' draft = false title = 'Using the power of maths to fix picom' params math = true image = 'header.png' tags =  \"maths\",  +++\\E$"}
