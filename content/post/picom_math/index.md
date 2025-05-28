@@ -156,11 +156,13 @@ now this sounds easy till you realise picom dosnt have specific triggers for res
 so my first thought was just use the preset animation `geometry`:
 
 ```text {linenos=inline}
-animations =({
+animations =(
     ...
-    triggers = [ "geometry" ];
-    preset = "geometry-change";
-})
+    {
+        triggers = [ "geometry" ];
+        preset = "geometry-change";
+    }
+)
 ```
 
 Now i would show you a video of the result of this, however i cannot be bothered so i shall explain instead. so this function is constant time no matter how small the move or tiny the window geometry changes it will always take how ever long you tell it.
@@ -171,3 +173,5 @@ What we need is a time funtion that scales relative to how big the move is.
 
 ## The code
 
+so as a precursor to the math we need some code, so i was going to use the `geometry-change` preset but it annoys me. it takes a screenshot
+and shows that the window scales. it leads to some very odd results. from what i gather this is needed as the animations get applyed after the window scales/moves so if a window moves from big to small it will, shrink, scale then move. the issue is, the 'solution' has the same problem just in the opposite direction.
