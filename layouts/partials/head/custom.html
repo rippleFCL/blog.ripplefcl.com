@@ -1,1 +1,15 @@
 <script defer src="https://cloud.umami.is/script.js" data-website-id="6edad144-c46b-47b4-8065-2678be6406e8"></script>
+{{ if .Param "math" }}
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
+      inlineMath: [['\\(', '\\)']]                  // inline
+    },
+    loader:{
+      load: ['ui/safe']
+    },
+  };
+</script>
+{{ end }}

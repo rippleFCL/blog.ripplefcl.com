@@ -45,3 +45,15 @@ markup:
   goldmark:
     renderer:
       unsafe: True
+    extensions:
+        passthrough:
+          delimiters:
+            block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+            inline:
+            - - \(
+              - \)
+          enable: true
