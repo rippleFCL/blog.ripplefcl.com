@@ -2,6 +2,9 @@
 date = '2025-04-30T16:54:05+01:00'
 draft = false
 title = 'Using the power of maths to fix picom'
+[params]
+  math = true
+image = 'header.png'
 tags = [
     "maths",
 ]
@@ -13,13 +16,13 @@ Welcome.
 
 I've been dabbling with [picom](https://github.com/yshui/picom) the [compositor](https://en.wikipedia.org/wiki/Compositing_manager). That means it does magic X11 things to make
 your windows look nicer, such as drop shadows, transparency and, today's topic of interest, __animations__. As said in the title this is gonna involve maths and that is scary to some
-but i assure you this is fun! ~~hopfully~~.
+but I assure you this is fun! ~~hopfully~~.
 
 
 
 ## The picom journey begins
-So to begin, after alot of tinkering with fading, transparency and the myriad of other settings in picom. One thing became
-very apparent, its features wierdly conflict. good example of this is fading:
+So to begin, after a lot of tinkering with fading, transparency and the myriad of other settings in picom. One thing became
+very apparent, its features weirdly conflict. Good example of this is fading:
 
 ```text {linenos=inline}
 #################################
@@ -78,11 +81,11 @@ animations = ({
 )
 ```
 
-ill quickly explain whats going on here before explaing why to go the animation route insted of setting fade to true.
+Ill quickly explain what's going on here before explain why to go the animation route instead of setting fade to true.
 
-so the preset appear/disappear are just fading opacity of the window from 0-100 and 100-0 respectivly. so we trigger this on opening/closing a window and hiding/showing
-(minimising/switching virtual desktops). the open/close/show/hide triggers mimic the fading option.
-now, problems begin when i attempted to use window rules to make unfocused windows slightly transparent.
+so the preset appear/disappear are just fading opacity of the window from 0-100 and 100-0 respectively. So we trigger this on opening/closing a window and hiding/showing
+(minimizing/switching virtual desktops). The open/close/show/hide triggers mimic the fading option.
+Now, problems begin when I attempted to use window rules to make unfocused windows slightly transparent.
 
 ```text {linenos=inline}
 rules = (
@@ -97,14 +100,14 @@ rules = (
     },
 )
 ```
-the main problem seams to be when the `fading` option is set there seams to be no animation on the opacity changing or when its set like this? honestly i have no clue.
-the result is when a window opens its instantly focused and so no animation plays and it appears at full opacity, anyways not good :(
+The main problem seams to be when the `fading` option is set there seams to be no animation on the opacity changing or when it's set like this? Honestly I have no clue.
+The result is when a window opens its instantly focused and so no animation plays, and it appears at full opacity, anyway not good :(
 
 
 ## Fixing the fading problems
 
 
-the solution I came up with was to impliment "fading but better" myself:
+the solution I came up with was to implement "fading but better" myself:
 
 ```text {linenos=inline}
 animations = ({
@@ -143,17 +146,17 @@ animations = ({
 )
 ```
 
-so the main fixes is attach a fading animation to opacity changes then blocking that animation when the window open/closes/shows/hides. This looks good 10/10.
-This is a big plus for doing all animations yourself non of the in built animations toggles have the suppression section so nothing quite works correctly together
+So the main fixes are attached a fading animation to opacity changes then blocking that animation when the window open/closes/shows/hides. This looks good 10/10.
+This is a big plus for doing all animations yourself none of the in built animations toggles have the suppression section, so nothing quite works correctly together
 
 # The maths, The code and the problem
 
 ## The problem
 
-so the problem i ran into and why im writing this blog post is picom animations for moving, resizing, and dragging windows in bspwm.
-now this sounds easy till you realise picom dosnt have specific triggers for resizing or moving windows, it all has to be done by the same animation.
+So the problem I ran into and why I'm writing this blog post is picom animations for moving, resizing, and dragging windows in bspwm.
+Now this sounds easy untill you realise picom doesn't have specific triggers for resizing or moving windows, it all has to be done by the same animation.
 
-so my first thought was just use the preset animation `geometry`:
+So my first thought was 'just use the preset animation `geometry`':
 
 ```text {linenos=inline}
 animations =(
@@ -165,18 +168,18 @@ animations =(
 )
 ```
 
-Now i would show you a video of the result of this, however i cannot be bothered so i shall explain instead. so this function is constant time no matter how small the move or tiny the window geometry changes it will always take how ever long you tell it.
+Now I would show you a video of the result of this, however I cannot be bothered so I shall explain instead. This function is constant time no matter how small the move or tiny the window geometry changes it will always take however long you tell it.
 
-this sounds fine and it is for moving window positions on screen. but it absoulty breaks resizing windows. as you drag a window it triggers this animation many times a second and of course it take x amount of seconds to finish that animation of the tiny move. this leads to resizing lagging heavily behind where your mouse is, it just looks horrible and feels mushy.
+This sounds fine, and it is for moving window positions on screen, but it absoulty breaks resizing windows. As you drag a window it triggers this animation many times a second and of course it takes x amount of seconds to finish that animation of the tiny move. This leads to resizing lagging heavily behind where your mouse is, it just looks horrible and feels mushy.
 
 What we need is a time funtion that scales relative to how big the move is.
 
 ## The code
 
-so as a precursor to the math we need some code. i was going to use the `geometry-change` preset, but it annoys me. It takes a screenshot
-and shows that the window scales. it leads to some very odd results. from what i gather this is needed as the animations get applyed after the window scales/moves so if a window moves from big to small it will, shrink, scale then move. the issue is, the 'solution' is just the original problem just in the opposite direction, so id rather skip this.
+So as a precursor to the math we need some code. I was going to use the `geometry-change` preset, but it annoys me. It takes a screenshot
+and shows that the window scales. It leads to some very odd results. From what I gather this is needed as the animations get applied after the window scales/moves so if a window moves from big to small it will, shrink, scale then move. The issue is, the 'solution' is just the original problem just in the opposite direction, so I'd rather skip this.
 
-so after digging around the [picom](https://github.com/yshui/picom/) i found the [presets](https://github.com/yshui/picom/blob/next/data/animation_presets.conf) config. the `geometry-change` looks like this:
+So after digging around the [picom](https://github.com/yshui/picom/) I found the [presets](https://github.com/yshui/picom/blob/next/data/animation_presets.conf) config. The `geometry-change` looks like this:
 
 ```text {linenos=inline}
 geometry-change = {
@@ -220,10 +223,139 @@ geometry-change = {
 };
 ```
 
-so after removing the `saved-image-blend` section i have something akin to what i want but there is still a issue
+so after removing the `saved-image-blend` section I have something akin to what I want, but there is still an issue
 
-<!-- ## The maths
+## The maths
 
 now to address the problem, that pesky distant dependant duration function.
 
-so picom  -->
+so picom gives you a few mathematical operations `+ - * / and ^`. My first thought is we need to get the distance of how for the window is moving so:
+
+```
+x_diff='window-x - window-x-before'
+y_diff='window-y - window-y-before'
+diff='x_diff + y_diff'
+```
+This is a bit naive, window positions start in a corner (I can't remember what corner, but it shouldn't matter) this is makes calculating windows translating away from this origin easy but breaks for windows moving closer as the diff is negative.
+
+What we need is an abs function. I spent quite a while searching on how to do this. Knowing I could do:
+
+\[
+abs(x) = \sqrt{x^2}
+\]
+but picom didn't have square root?? After quite a lot longer, embarrassingly, the answer is staring us in the face.
+\[
+    \sqrt[b]{x} = x^{\frac{1}{b}}
+\]
+
+I felt so stupid only now remembering this. Anyway we can refactor to:
+
+\[
+    abs(x) = (x^2)^{\frac{1}{2}}
+\]
+
+So my idea is to make a function that has a dead band where small moves are virtually instant and big moves past the dead band take the same time. A function that may come to mind is the sigmoid function
+
+\[
+    y = \frac{1}{1+e^{-x}}
+\]
+
+with this we can substitute our abs distance into the sigmoid function and fuck off _e_ like so :
+
+\[
+    y = \frac{1}{1+5^{-((x^2)^{\frac{1}{2}})}}
+\]
+Choosing 5 as _e_ as it gives a steeper transition. After this lets lob it into [desmos](https://www.desmos.com/calculator).
+
+![desmos output](desmos_wrong.png)
+
+our function is in red and the _abs_ function is in blue
+
+Honestly not exactly what I wanted, but it makes sense. If we substitute the lowest value of the _abs_ function we get why
+
+\[
+\begin{aligned}
+y &= \frac{1}{1+5^{-((x^2)^{\frac{1}{2}})}} \\
+y &= \frac{1}{1+5^{-0}} \\
+y &= \frac{1}{1+5^{0}} \\
+y &= \frac{1}{1+1} \\
+y &= \frac{1}{2} \\
+y &= 0.5
+\end{aligned}
+\]
+
+Simple solution move the abs function down by amount _d_ this can also be scaled to set the dead space width.
+
+\[
+    ds(x, d) = \frac{1}{1+5^{d-((x^2)^{\frac{1}{2}})}}
+\]
+
+which yields:
+
+![desmos](desmos_correct.png)
+
+Great success! After converting this to code we get
+
+```text {linenos=inline}
+dead_band = 350;
+animation_target_duration=0.2
+x-diff-abs = "(((window-x-befor - window-x)^2)^0.5)";
+y-diff-abs = "(((window-y-befor - window-y)^2)^0.5)";
+anim-duration = "animation_target_duration*(1/(1+(5^(dead_band - (x-diff-abs + y-diff-abs)))))";
+```
+This kinda works, a new issue has arisen the `window-x` and `window-y` are from the top left corner of the window. Seams like not a problem but consider this setup:
+
+![wonky_window_setup](weird_window_setup.png)
+
+The issue is our function calculates this as a tiny move because the top left of the windows are not moving much. What we need to do is calculate the centre of the windows then calculate the diff on that. Luckly this is simple and gives us our final iteration of the code:
+
+```text {linenos=inline}
+{
+  triggers = [ "geometry" ];
+  dead_band = 350;
+  animation_target_duration=0.2
+  win_x_center_before = "(window-x-before + (window-width-before / 2))"
+  win_x_center_after = "(window-x + (window-width / 2))"
+  win_y_center_before = "(window-y-before+(window-height-before / 2))"
+  win_y_center_after = "(window-y + (window-height / 2))"
+  x-diff-abs = "(((win_x_center_before - win_x_center_after)^2)^0.5)";
+  y-diff-abs = "(((win_y_center_before - win_y_center_after)^2)^0.5)";
+  anim-duration = "animation_target_duration*(1/(1+(5^(dead_band - (x-diff-abs + y-diff-abs)))))";
+
+  scale-x = {
+      curve = "cubic-bezier(0.33, 0, 1, 0.66)";
+      duration = "anim-duration";
+      start = "window-width-before / window-width";
+      end = 1;
+  };
+  scale-y = {
+      curve = "cubic-bezier(0.33, 0, 1, 0.66)";
+      duration = "anim-duration";
+      start = "window-height-before / window-height";
+      end = 1;
+  };
+  shadow-scale-x = "scale-x";
+  shadow-scale-y = "scale-y";
+  offset-x = {
+      curve = "cubic-bezier(0.33, 0, 1, 0.66)";
+      duration = "anim-duration";
+      start = "window-x-before - window-x";
+      end = 0;
+  };
+  offset-y = {
+      curve = "cubic-bezier(0.33, 0, 1, 0.66)";
+      duration = "anim-duration";
+      start = "window-y-before - window-y";
+      end = 0;
+  };
+  shadow-offset-x = "offset-x";
+  shadow-offset-y = "offset-y";
+  suppressions = ["increase-opacity", "decrease-opacity"]
+
+}
+```
+
+## the end
+The code is good now!
+
+Fin
