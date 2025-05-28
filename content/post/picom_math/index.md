@@ -173,5 +173,57 @@ What we need is a time funtion that scales relative to how big the move is.
 
 ## The code
 
-so as a precursor to the math we need some code, so i was going to use the `geometry-change` preset but it annoys me. it takes a screenshot
-and shows that the window scales. it leads to some very odd results. from what i gather this is needed as the animations get applyed after the window scales/moves so if a window moves from big to small it will, shrink, scale then move. the issue is, the 'solution' has the same problem just in the opposite direction.
+so as a precursor to the math we need some code. i was going to use the `geometry-change` preset, but it annoys me. It takes a screenshot
+and shows that the window scales. it leads to some very odd results. from what i gather this is needed as the animations get applyed after the window scales/moves so if a window moves from big to small it will, shrink, scale then move. the issue is, the 'solution' is just the original problem just in the opposite direction, so id rather skip this.
+
+so after digging around the [picom](https://github.com/yshui/picom/) i found the [presets](https://github.com/yshui/picom/blob/next/data/animation_presets.conf) config. the `geometry-change` looks like this:
+
+```text {linenos=inline}
+geometry-change = {
+    scale-x = {
+        curve = "cubic-bezier(0.07, 0.65, 0, 1)";
+        duration = "placeholder0";
+        start = "window-width-before / window-width";
+        end = 1;
+    };
+    scale-y = {
+        curve = "cubic-bezier(0.07, 0.65, 0, 1)";
+        duration = "placeholder0";
+        start = "window-height-before / window-height";
+        end = 1;
+    };
+    shadow-scale-x = "scale-x";
+    shadow-scale-y = "scale-y";
+    offset-x = {
+        curve = "cubic-bezier(0.07, 0.65, 0, 1)";
+        duration = "placeholder0";
+        start = "window-x-before - window-x";
+        end = 0;
+    };
+    offset-y = {
+        curve = "cubic-bezier(0.07, 0.65, 0, 1)";
+        duration = "placeholder0";
+        start = "window-y-before - window-y";
+        end = 0;
+    };
+    saved-image-blend = {
+        duration = "placeholder0";
+        start = 1;
+        end = 0;
+    };
+    shadow-offset-x = "offset-x";
+    shadow-offset-y = "offset-y";
+    *knobs = {
+        duration = 0.4;
+    };
+    *placeholders = ((0, "duration"));
+};
+```
+
+so after removing the `saved-image-blend` section i have something akin to what i want but there is still a issue
+
+<!-- ## The maths
+
+now to address the problem, that pesky distant dependant duration function.
+
+so picom  -->
