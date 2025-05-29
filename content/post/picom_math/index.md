@@ -157,11 +157,11 @@ With that in mind, we can now build our own `abs(x)` function:
     abs(x) = (x^2)^{\frac{1}{2}}
 \]
 
-In laymans terms, this is simple: Squaring _x_ will always yeild a positive value because any positive squared is always positive, and any negative squared is also always positive. Since square root is the inverse of squared, we can now get the square root of _x_ to determine the absolute value of _x_.
+In laymans terms, this is simple: Squaring _x_ will always yield a positive value because any positive squared is always positive, and any negative squared is also always positive. Since square root is the inverse of squared, we can now get the square root of _x_ to determine the absolute value of _x_.
 
 My idea is to make a function that has a dead space where the animations for small moves are virtually instant, and animations for all larger moves that exceed the dead space last effectively the same amount of time.
 
-A function that may come to mind is the sigmoid function, usually presented like so (operating on x axis).
+A function that may come to mind is the sigmoid function, usually presented like so (operating on x-axis).
 
 \[
     y = \frac{1}{1+e^{-x}}
@@ -297,7 +297,7 @@ The code is good now. Thanks for reading!
 
 Fin
 
-(p.s. thank you very very much [tig](github.com/tigattack))
+(p.s. thank you very, very much [tig](github.com/tigattack))
 
 [^1]: <https://wiki.archlinux.org/title/Picom>
 [^2]: <https://wiki.archlinux.org/title/Bspwm>
