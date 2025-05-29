@@ -5,6 +5,7 @@ title: "ripple's blog"
 module:
   imports:
     - path: github.com/CaiJimmy/hugo-theme-stack/v3
+    - path: github.com/martignoni/hugo-video
 
 Params:
   mainSections: ['post', 'taic']
@@ -31,7 +32,7 @@ menu:
       url: /post
       weight: -100
     - identifier: taic
-      name: Thoughts as i code
+      name: Thoughts as I Code
       url: /taic
       weight: -100
   social:
