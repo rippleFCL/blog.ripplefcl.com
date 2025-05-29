@@ -14,14 +14,14 @@ tags = [
 Welcome.
 
 I've been dabbling with [picom](https://github.com/yshui/picom) the [compositor](https://en.wikipedia.org/wiki/Compositing_manager). That means it does magic X11 things to make
-your windows look nicer, such as drop shadows, transparency and, today's topic of interest, __animations__. As said in the title this is gonna involve maths and that is scary to some, but I assure you this is fun! ~~Hopfully~~.
+your windows look nicer, such as drop shadows, transparency and, today's topic of interest, __animations__. As said in the title this is gonna involve maths and that is scary to some, but I assure you this is fun! ~~Hopefully~~.
 
 ## The problem
 
-the problem I ran into and why I'm writing this blog post is picom animations for moving, resizing, and dragging windows in bspwm.
-Now this sounds easy until you realise picom doesn't have specific triggers for resizing or moving windows, it all has to be done by the same animation.
+The problem I ran into and why I'm writing this blog post is picom animations for moving, resizing, and dragging windows in bspwm.
+this sounds easy until you realise picom doesn't have specific triggers for resizing or moving windows, it all has to be done by the same animation.
 
-my first thought was 'just use the preset animation `geometry`':
+My first thought was 'just use the preset animation `geometry`':
 
 ```text {linenos=inline}
 animations =(
@@ -41,10 +41,10 @@ What we need is a time funtion that scales relative to how big the move is.
 
 ## The code
 
-as a precursor to the math we need some code. I was going to use the `geometry-change` preset, but it annoys me. It takes a screenshot
+As a precursor to the math we need some code. I was going to use the `geometry-change` preset, but it annoys me. It takes a screenshot
 and shows that during the animation. It leads to some very odd results. From what I gather this is needed as the animations get applied after the window scales/moves. If a window shrinks, this leads to the small window being streached to play the animation. The issue is, the 'solution' is just the original problem just in the opposite direction, I'd rather skip this.
 
-after digging around the [picom](https://github.com/yshui/picom/) I found the [presets](https://github.com/yshui/picom/blob/next/data/animation_presets.conf) config. The `geometry-change` looks like this:
+After digging around the [picom](https://github.com/yshui/picom/) I found the [presets](https://github.com/yshui/picom/blob/next/data/animation_presets.conf) config. The `geometry-change` looks like this:
 
 ```text {linenos=inline}
 geometry-change = {
@@ -88,13 +88,13 @@ geometry-change = {
 };
 ```
 
-after removing the `saved-image-blend` section I have something akin to what I want, but there is still problems to solve.
+After removing the `saved-image-blend` section I have something akin to what I want, but there is still problems to solve.
 
 ## The maths
 
 Time to deal with that pesky distant dependant duration function.
 
-picom gives you a few mathematical operations `+ - * / and ^`. My first thought is we need to get the distance of how for the window is moving so:
+Picom gives you a few mathematical operations `+ - * / and ^`. My first thought is we need to get the distance of how for the window is moving so:
 
 ```
 x_diff='window-x - window-x-before'
@@ -119,7 +119,7 @@ I felt so stupid only now remembering this. Anyway we can refactor to:
     abs(x) = (x^2)^{\frac{1}{2}}
 \]
 
-my idea is to make a function that has a dead band where small moves are virtually instant and big moves past the dead band take the same time. A function that may come to mind is the sigmoid function
+My idea is to make a function that has a dead band where small moves are virtually instant and big moves past the dead band take the same time. A function that may come to mind is the sigmoid function
 
 \[
     y = \frac{1}{1+e^{-x}}
@@ -220,7 +220,7 @@ The issue is our function calculates this as a tiny move because the top left of
 }
 ```
 
-## the end
+## The end
 
 The code is good now!
 
