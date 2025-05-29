@@ -132,9 +132,9 @@ with this we can substitute our abs distance into the sigmoid function and fuck 
 \]
 Choosing 5 as _e_ as it gives a steeper transition. After this lets lob it into [desmos](https://www.desmos.com/calculator).
 
-![desmos output](desmos_wrong.png)
+![Our function is in red and the _abs_ function is in blue](desmos_wrong.png)
 
-our function is in red and the _abs_ function is in blue
+
 
 Honestly not exactly what I wanted, but it makes sense. If we substitute the lowest value of the _abs_ function we get why
 
@@ -157,7 +157,7 @@ Simple solution move the abs function down by amount _d_ this can also be scaled
 
 which yields:
 
-![desmos](desmos_correct.png)
+![Sigmoid in green, modified abs in blue](desmos_correct.png)
 
 Great success! After converting this to code we get
 
