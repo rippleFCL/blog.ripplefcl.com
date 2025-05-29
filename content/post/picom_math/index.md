@@ -1,7 +1,7 @@
 +++
 date = '2025-04-30T16:54:05+01:00'
 draft = false
-title = 'Using the Power of Maths To Fix Picom'
+title = 'Using the Power of Maths to Fix Picom'
 [params]
   math = true
 image = 'header.png'
@@ -18,10 +18,10 @@ your windows look nicer, such as drop shadows, transparency and, today's topic o
 
 ## The problem
 
-So the problem I ran into and why I'm writing this blog post is picom animations for moving, resizing, and dragging windows in bspwm.
-Now this sounds easy untill you realise picom doesn't have specific triggers for resizing or moving windows, it all has to be done by the same animation.
+the problem I ran into and why I'm writing this blog post is picom animations for moving, resizing, and dragging windows in bspwm.
+Now this sounds easy until you realise picom doesn't have specific triggers for resizing or moving windows, it all has to be done by the same animation.
 
-So my first thought was 'just use the preset animation `geometry`':
+my first thought was 'just use the preset animation `geometry`':
 
 ```text {linenos=inline}
 animations =(
@@ -35,16 +35,16 @@ animations =(
 
 Now I would show you a video of the result of this, however I cannot be bothered, so I shall explain instead. This function is constant time no matter how small the move or tiny the window geometry changes it will always take however long you tell it.
 
-This sounds fine, and it is for moving window positions on screen, but it absoulty breaks resizing windows. As you drag a window it triggers this animation many times a second and of course it takes x amount of seconds to finish that animation of the tiny move. This leads to resizing lagging heavily behind where your mouse is, it just looks horrible and feels mushy.
+This sounds fine, and it is for moving window positions on screen, but it absolutely breaks resizing windows. As you drag a window it triggers this animation many times a second and of course it takes x amount of seconds to finish that animation of the tiny move. This leads to resizing lagging heavily behind where your mouse is, it just looks horrible and feels mushy.
 
 What we need is a time funtion that scales relative to how big the move is.
 
 ## The code
 
-So as a precursor to the math we need some code. I was going to use the `geometry-change` preset, but it annoys me. It takes a screenshot
-and shows that the window scales. It leads to some very odd results. From what I gather this is needed as the animations get applied after the window scales/moves so if a window moves from big to small it will, shrink then play the  scale and move animation. This leads to the small window being streached to play the animation. The issue is, the 'solution' is just the original problem just in the opposite direction, so I'd rather skip this.
+as a precursor to the math we need some code. I was going to use the `geometry-change` preset, but it annoys me. It takes a screenshot
+and shows that during the animation. It leads to some very odd results. From what I gather this is needed as the animations get applied after the window scales/moves. If a window shrinks, this leads to the small window being streached to play the animation. The issue is, the 'solution' is just the original problem just in the opposite direction, I'd rather skip this.
 
-So after digging around the [picom](https://github.com/yshui/picom/) I found the [presets](https://github.com/yshui/picom/blob/next/data/animation_presets.conf) config. The `geometry-change` looks like this:
+after digging around the [picom](https://github.com/yshui/picom/) I found the [presets](https://github.com/yshui/picom/blob/next/data/animation_presets.conf) config. The `geometry-change` looks like this:
 
 ```text {linenos=inline}
 geometry-change = {
@@ -88,13 +88,13 @@ geometry-change = {
 };
 ```
 
-So after removing the `saved-image-blend` section I have something akin to what I want, but there is still problems to solve.
+after removing the `saved-image-blend` section I have something akin to what I want, but there is still problems to solve.
 
 ## The maths
 
 Time to deal with that pesky distant dependant duration function.
 
-So picom gives you a few mathematical operations `+ - * / and ^`. My first thought is we need to get the distance of how for the window is moving so:
+picom gives you a few mathematical operations `+ - * / and ^`. My first thought is we need to get the distance of how for the window is moving so:
 
 ```
 x_diff='window-x - window-x-before'
@@ -119,13 +119,13 @@ I felt so stupid only now remembering this. Anyway we can refactor to:
     abs(x) = (x^2)^{\frac{1}{2}}
 \]
 
-So my idea is to make a function that has a dead band where small moves are virtually instant and big moves past the dead band take the same time. A function that may come to mind is the sigmoid function
+my idea is to make a function that has a dead band where small moves are virtually instant and big moves past the dead band take the same time. A function that may come to mind is the sigmoid function
 
 \[
     y = \frac{1}{1+e^{-x}}
 \]
 
-with this we can substitute our abs distance into the sigmoid function and fuck off _e_ like so :
+with this we can substitute our abs distance into the sigmoid function and fuck off _e_ like so:
 
 \[
     y = \frac{1}{1+5^{-((x^2)^{\frac{1}{2}})}}
