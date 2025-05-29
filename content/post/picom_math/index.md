@@ -293,9 +293,6 @@ The issue is that if I were to swap these two windows' locations, our function w
     <figcaption style="font-size: 1.5rem">The wonderful final product</figcaption>
 </figure>
 
-
-## The End
-
 The code is good now. Thanks for reading!
 
 Fin
