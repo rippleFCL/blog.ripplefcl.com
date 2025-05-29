@@ -1,2 +1,4 @@
 github.com/CaiJimmy/hugo-theme-stack/v3 v3.30.0 h1:uITC7EKGyfPjyi3C5At++E0Uu1qQXtqiwMV4pd7LkLs=
 github.com/CaiJimmy/hugo-theme-stack/v3 v3.30.0/go.mod h1:IPmCXiIxlFSLFYS0tOmYP6ySLviyeNVSabyvSuaxD+I=
+github.com/martignoni/hugo-video v0.0.0-20240811132436-bc3ef03fe9c7 h1:zEriuwalEIcm30VMehnR9Y6uf0AIWwAY27t6huGB/h0=
+github.com/martignoni/hugo-video v0.0.0-20240811132436-bc3ef03fe9c7/go.mod h1:6znBMZPHUeexE9mrmkJOV68XegajtAmiA/dADXCRRt4=
