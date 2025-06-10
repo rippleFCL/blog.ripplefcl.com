@@ -14,4 +14,4 @@ I have decided to touch grass.
 
 That's what this section will be for. The chronicels of touching grass[^1]. This will be less blog, more image gallarys showing the pretty thing ive seen on my adventures in this "grass[^1]" I keep being told to touch.
 
-[^1]: [grass](/hidden/dyjctlag/)
+[^1]: info on [grass](/hidden/dyjctlag/)
