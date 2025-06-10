@@ -8,7 +8,7 @@ module:
     - path: github.com/martignoni/hugo-video
 
 Params:
-  mainSections: ['post', 'taic']
+  mainSections: ['post', 'tcotg']
   article:
     toc: true
     math: true
@@ -34,6 +34,10 @@ menu:
     - identifier: taic
       name: Thoughts as I Code
       url: /taic
+      weight: -100
+    - identifier: tcotg
+      name: The chronicles of touching grass
+      url: /tcotg
       weight: -100
   social:
     - identifier: github
