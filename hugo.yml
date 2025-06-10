@@ -8,6 +8,13 @@ module:
 
 Params:
   favicon: /favicon.ico
+  defaultImage:
+    opengraph:
+      enabled: true
+      local: true
+      src: img/defaultimage.jpg
+
+  description: "Welcome to my blog. A archive of unhinged thoughs and actions"
   mainSections: ['post', 'tcotg']
   article:
     toc: true
