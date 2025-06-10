@@ -66,12 +66,12 @@ def main(path: str, filetype: str, min_cols: int, max_cols: int, testrun: bool):
     if not directory.is_dir():
         click.echo(f"Provided path '{path}' is not a directory.")
         return
-    gallory_structure = [[]]
+    gallery_structure = [[]]
     cols = int((min_cols+max_cols)/2)
     for index, file in enumerate(directory.glob("*")):
         if file.is_file() and file.suffix.lower() == f".{filetype.lower()}":
-            if len(gallory_structure[-1]) >= cols:
-                gallory_structure.append([])
+            if len(gallery_structure[-1]) >= cols:
+                gallery_structure.append([])
             try:
                 # Simulate processing the file
                 click.echo(f"Processing file: {file.name}")
@@ -90,13 +90,13 @@ def main(path: str, filetype: str, min_cols: int, max_cols: int, testrun: bool):
                     click.echo(f"Already processed {old_file_name}, shortcode: {short_code}")
 
 
-                gallory_structure[-1].append(short_code)
+                gallery_structure[-1].append(short_code)
                 cols = get_new_col_width(min_cols, max_cols, cols)
                 # Here you would add your image processing logic
             except Exception as e:
                 click.echo(f"Error processing {file.name}: {e}")
-    gallary_string = "\n\n".join(" ".join(x) for x in gallory_structure)
-    click.echo("\nGallary Structure:")
-    click.echo(gallary_string)
+    gallery_string = "\n\n".join(" ".join(x) for x in gallery_structure)
+    click.echo("\ngallery Structure:")
+    click.echo(gallery_string)
 if __name__ == "__main__":
     main()
