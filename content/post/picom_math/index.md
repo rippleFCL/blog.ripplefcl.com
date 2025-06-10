@@ -1,14 +1,13 @@
-+++
-date = '2025-04-30T16:54:05+01:00'
-draft = false
-title = 'Using the Power of Maths to Fix Picom'
-[params]
-  math = true
-image = 'header.png'
-tags = [
-    "maths",
-]
-+++
+---
+date: "2025-04-30T16:54:05+01:00"
+draft: false
+params:
+  image: header.png
+  math: true
+  tags:
+  - maths
+title: Using the Power of Maths to Fix Picom
+---
 # The Maths, The Code, and The Problem
 
 Welcome.
