@@ -1,8 +1,8 @@
-+++
-date = '2025-06-10T09:02:02+01:00'
-draft = true
-title = 'Did You Just Click That Link About Grass?'
-+++
+---
+date: "2025-06-10T09:02:02+01:00"
+draft: false
+title: Did You Just Click That Link About Grass?
+---
 # Well you clicked that
 If you are unfamiliar about grass, I believe you should join me in going outside.
 
