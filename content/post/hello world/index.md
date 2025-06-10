@@ -6,6 +6,13 @@ Description: 'wellcome to the blog'
 tags:
 - intro
 title: Hello world!
+keywords:
+    - ripple
+    - ripplefcl
+    - blog
+    - cursed
+    - human
+    - being
 ---
 
 ## Intro
