@@ -19,7 +19,7 @@ keywords:
 
 # Preramble
 
-I went to Wales recently. Was mad, some to die for views.
+I recently visited Wales. The scenery was impressive, with striking landscapes and plenty of interesting sights. It was a memorable trip.
 
 ![](compgi_e747077a4a.jpg) ![](compgi_b2882e6b35.jpg)
 
