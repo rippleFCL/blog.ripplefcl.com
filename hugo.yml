@@ -1,13 +1,13 @@
 baseURL: 'https://blog.ripplefcl.com/'
 languageCode: 'en-gb'
 title: "ripple's blog"
-
 module:
   imports:
     - path: github.com/CaiJimmy/hugo-theme-stack/v3
     - path: github.com/martignoni/hugo-video
 
 Params:
+  favicon: /favicon.ico
   mainSections: ['post', 'tcotg']
   article:
     toc: true
