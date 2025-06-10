@@ -46,12 +46,13 @@ def resize_compress_image(image_path: Path, max_width: int):
 
 
 def get_new_col_width(min_cols:int, max_cols:int,  current_cols:int) -> int:
-    if min_cols < current_cols < max_cols:
-        current_cols += random.randint(-1, 1)
-    elif current_cols == min_cols:
-        current_cols += 1
-    elif current_cols == max_cols:
-        current_cols -= 1
+    if random.randint(0, 100) < 95:
+        if min_cols < current_cols < max_cols:
+            current_cols += random.randint(-1, 1)
+        elif current_cols == min_cols:
+            current_cols += 1
+        elif current_cols == max_cols:
+            current_cols -= 1
     return current_cols
 
 @click.command()
@@ -61,7 +62,9 @@ def get_new_col_width(min_cols:int, max_cols:int,  current_cols:int) -> int:
 @click.option("--max-cols", type=int, default=4, help="Number of columns for processing")
 @click.option("--testrun", is_flag=True, default=False, help="Enable debug mode")
 def main(path: str, filetype: str, min_cols: int, max_cols: int, testrun: bool):
-
+    if min_cols > max_cols:
+        click.echo("Fucked it")
+        return
     directory = Path(path)
     if not directory.is_dir():
         click.echo(f"Provided path '{path}' is not a directory.")
@@ -72,6 +75,8 @@ def main(path: str, filetype: str, min_cols: int, max_cols: int, testrun: bool):
         if file.is_file() and file.suffix.lower() == f".{filetype.lower()}":
             if len(gallery_structure[-1]) >= cols:
                 gallery_structure.append([])
+                cols = get_new_col_width(min_cols, max_cols, cols)
+
             try:
                 # Simulate processing the file
                 click.echo(f"Processing file: {file.name}")
@@ -91,12 +96,11 @@ def main(path: str, filetype: str, min_cols: int, max_cols: int, testrun: bool):
 
 
                 gallery_structure[-1].append(short_code)
-                cols = get_new_col_width(min_cols, max_cols, cols)
                 # Here you would add your image processing logic
             except Exception as e:
                 click.echo(f"Error processing {file.name}: {e}")
     gallery_string = "\n\n".join(" ".join(x) for x in gallery_structure)
-    click.echo("\ngallery Structure:")
+    click.echo("\nGallery Structure:")
     click.echo(gallery_string)
 if __name__ == "__main__":
     main()
