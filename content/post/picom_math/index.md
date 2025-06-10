@@ -1,12 +1,14 @@
 ---
 date: "2025-04-30T16:54:05+01:00"
 draft: false
+Description: A quick dive into picom animations and how i got them working using maths
 params:
   image: header.png
   math: true
   tags:
   - maths
-title: Using the Power of Maths to Fix Picom
+
+title: Using the Power of Maths to Fix Picom Animations
 ---
 # The Maths, The Code, and The Problem
 
