@@ -2,6 +2,7 @@
 date: "2025-04-29T15:04:34+01:00"
 draft: false
 image: vscodeting.png
+Description: 'wellcome to the blog'
 tags:
 - intro
 title: Hello world!

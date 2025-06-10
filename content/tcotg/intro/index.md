@@ -2,6 +2,7 @@
 date: '2025-06-10T08:44:31+01:00'
 draft: False
 title: 'Time to Touch Grass'
+Description: 'Explaining what the hell "The chronicels of touching grass" is '
 params:
     image: header.png
     tags:
