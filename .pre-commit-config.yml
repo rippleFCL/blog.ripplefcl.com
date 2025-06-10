@@ -1,0 +1,21 @@
+repos:
+  - repo: local
+    hooks:
+      # Thanks https://jade.fyi/blog/pre-commit-exif-safety/
+      - id: no-spicy-exif
+        name: Ban spicy exif data
+        description: Ensures that there is no sensitive exif data committed
+        entry: scripts/strip_exif.sh
+        language: script
+        exclude_types: ["svg"]
+        types: ["image"]
+
+      # Thanks https://ericmjl.github.io/blog/2023/10/14/how-i-made-a-local-pre-commit-hook-to-resize-images/
+      - id: optimise-images
+        name: Resize & Compress Images
+        entry: scripts/optimise_images.py
+        language: python
+        language_version: python3
+        additional_dependencies: [pillow, pyprojroot]
+        exclude_types: ["svg"]
+        types: ["image"]
