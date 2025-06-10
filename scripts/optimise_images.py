@@ -13,6 +13,9 @@ from pyprojroot import find_root, has_dir  # type: ignore
 
 
 def resize_image(image_path: Path, max_width: int) -> bool:
+    if "compgi_" in image_path.name:
+        print(f"Skipping already processed image: {image_path}")
+        return False
     with Image.open(image_path) as img:
         if img.size[0] > max_width:
             w_percent = max_width / float(img.size[0])
@@ -26,6 +29,9 @@ def resize_image(image_path: Path, max_width: int) -> bool:
 
 
 def compress_image(image_path: Path, max_size: int) -> bool:
+    if "compgi_" in image_path.name:
+        print(f"Skipping already processed image: {image_path}")
+        return False
     filesize = stat(image_path).st_size
     if filesize > max_size:
         buf = BytesIO()
@@ -38,7 +44,7 @@ def compress_image(image_path: Path, max_size: int) -> bool:
                 f.write(buf.getbuffer())
                 return True
         else:
-            print(f"Could not compress to desired size: {image_path}")
+            print(f"Could not compress to desired size: {image_path}, {new_size}")
     return False
 
 
