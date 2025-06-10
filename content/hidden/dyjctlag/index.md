@@ -8,6 +8,14 @@ params:
 # Well you clicked that
 If you are unfamiliar about grass, I believe you should join me in going outside.
 
+# How to go outside
+
+- step 1: Get dressed
+- step 2: Open your front (or back) door
+- step 3: walk through it
+
+Congrats you have gone outdoors!
+
 # Handly links
 
 - Infomation about [the outdoors](https://en.wikipedia.org/wiki/Wilderness)
