@@ -10,9 +10,9 @@ If you are unfamiliar about grass, I believe you should join me in going outside
 
 # How to go outside
 
-- step 1: Get dressed
-- step 2: Open your front (or back) door
-- step 3: walk through it
+- Step 1: Get dressed
+- Step 2: Open your front (or back) door
+- Step 3: Walk through it
 
 Congrats you have gone outdoors!
 
