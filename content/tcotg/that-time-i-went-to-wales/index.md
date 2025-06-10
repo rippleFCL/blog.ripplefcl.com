@@ -19,7 +19,7 @@ keywords:
 
 # Preramble
 
-I went to wales recently. was mad, some to die for views.
+I went to Wales recently. Was mad, some to die for views.
 
 ![](compgi_e747077a4a.jpg) ![](compgi_b2882e6b35.jpg)
 
@@ -43,20 +43,20 @@ I went to wales recently. was mad, some to die for views.
 
 ![](compgi_152f81a380.jpg) ![](compgi_f42b5b6554.jpg)
 
-![](compgi_cd3abaf234.jpg) ![](compgi_2007567c89.jpg)
+![](compgi_cd3abaf234.jpg) ![](compgi_2007567c89.jpg) ![](compgi_86b447bb8a.jpg)
 
-![](compgi_86b447bb8a.jpg) ![](compgi_0b53b44d6d.jpg) ![](compgi_709b0d1a73.jpg)
+![](compgi_0b53b44d6d.jpg) ![](compgi_709b0d1a73.jpg)
 
-![](compgi_5daee492d6.jpg) ![](compgi_1ad69d81bc.jpg)
+![](compgi_5daee492d6.jpg) ![](compgi_1ad69d81bc.jpg) ![](compgi_8e75db172c.jpg)
 
-![](compgi_8e75db172c.jpg) ![](compgi_bde0c10376.jpg) ![](compgi_a342253409.jpg)
+![](compgi_bde0c10376.jpg) ![](compgi_a342253409.jpg)
 
 ![](compgi_7bd285b065.jpg) ![](compgi_b34f70fb2b.jpg)
 
 ![](compgi_70307e69cc.jpg) ![](compgi_649945b138.jpg)
 
-![](compgi_ffdc1f7e74.jpg) ![](compgi_d051610495.jpg) ![](compgi_f7dbeb98cb.jpg)
+![](compgi_ffdc1f7e74.jpg) ![](compgi_d051610495.jpg) ![](compgi_62f9940ac6.jpg)
 
 ![](compgi_214b6f27f0.jpg) ![](compgi_6cf3458e9b.jpg)
 
-![](compgi_3879340d9c.jpg) ![](compgi_62f9940ac6.jpg)
+![](compgi_3879340d9c.jpg) ![](compgi_f7dbeb98cb.jpg)
