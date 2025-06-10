@@ -7,7 +7,19 @@ params:
   math: true
   tags:
   - maths
-
+keywords:
+    - blog
+    - picom
+    - arch
+    - maths
+    - animations
+    - tech
+    - ripple
+    - ripplefcl
+    - blog
+    - cursed
+    - human
+    - being
 title: Using the Power of Maths to Fix Picom Animations
 ---
 # The Maths, The Code, and The Problem

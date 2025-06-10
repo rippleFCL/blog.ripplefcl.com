@@ -7,6 +7,16 @@ params:
     image: header.png
     tags:
         - Intro
+
+keywords:
+    - ripple
+    - ripplefcl
+    - blog
+    - cursed
+    - human
+    - being
+    - touch
+    - grass
 ---
 # Intro
 
