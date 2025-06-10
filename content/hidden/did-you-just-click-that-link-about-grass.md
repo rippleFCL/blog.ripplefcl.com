@@ -2,6 +2,8 @@
 date: "2025-06-10T09:02:02+01:00"
 draft: false
 title: Did You Just Click That Link About Grass?
+params:
+  image: header.png
 ---
 # Well you clicked that
 If you are unfamiliar about grass, I believe you should join me in going outside.
