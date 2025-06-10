@@ -1,0 +1,14 @@
++++
+date = '2025-06-10T09:02:02+01:00'
+draft = true
+title = 'Did You Just Click That Link About Grass?'
++++
+# Well you clicked that
+If you are unfamiliar about grass, I believe you should join me in going outside.
+
+# Handly links
+
+- Infomation about [the outdoors](https://en.wikipedia.org/wiki/Wilderness)
+- A handy dandy page about [surviving outside](https://www.twineagles.org/wilderness-survival-guide.html)
+- Some motivation to [go outside](https://www.edutopia.org/article/7-simple-ways-get-outside-more-often/)
+
