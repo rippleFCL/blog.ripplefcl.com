@@ -6,8 +6,9 @@ Description: 'Wales you know'
 params:
     image: 'header.png'
     tags:
-        - 'outdoors'
-        - 'camping'
+        - 'Outdoors'
+        - 'Camping'
+        - 'Touching Grass'
 keywords:
     - camping
     - outdoors

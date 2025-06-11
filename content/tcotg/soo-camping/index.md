@@ -7,14 +7,9 @@ params:
     image: 'header.png'
     tags:
         - 'Camping'
+        - 'Outdoors'
         - 'Touching Grass'
 keywords:
-    - ripple
-    - ripplefcl
-    - blog
-    - cursed
-    - human
-    - being
     - camping
     - outdoors
 ---
