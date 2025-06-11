@@ -1,0 +1,6 @@
+User-agent: *
+{{ range .Pages }}
+{{- if strings.HasPrefix .RelPermalink "/taic/" -}}
+Disallow: {{ .RelPermalink }}
+{{ end -}}
+{{- end -}}
