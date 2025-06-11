@@ -14,8 +14,6 @@ keywords:
     - outdoors
 ---
 
-# Preramble
-
 I recently went camping, had a great time enjoying the outdoors, and especially loved the BBQ and sitting around the fire.
 
 ![](compgi_aa4e6e414b.jpg) ![](compgi_e75c884efc.jpg)
