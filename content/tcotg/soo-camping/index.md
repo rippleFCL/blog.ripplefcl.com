@@ -7,7 +7,6 @@ params:
     image: 'header.png'
     tags:
         - 'Camping'
-        - 'Outdoors'
         - 'Touching Grass'
 keywords:
     - camping
