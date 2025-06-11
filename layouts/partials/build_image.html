@@ -1,0 +1,40 @@
+{{ $src := .Path }}
+{{ $page := .Page }}
+{{- $image := $page.Resources.GetMatch (printf "%s" $src) -}}
+{{ $filter := images.AutoOrient }}
+
+{{- $Permalink := .Path | relURL | safeURL -}}
+{{- $Srcset := "" -}}
+{{- $Width := 0 -}}
+{{- $Height := 0 -}}
+
+{{- if not $image -}}
+	{{- errorf "Image %s not found in page %s" $src $page.File.Path -}}
+{{- end -}}
+
+{{- if not (default true .Page.Site.Params.imageProcessing.content.enabled) -}}
+	{{- $filter = images.NoProcessing -}}
+{{- end -}}
+
+{{- $image = $image | images.Filter $filter -}}
+{{- $Permalink = $image.RelPermalink -}}
+
+{{- $Width = $image.Width -}}
+{{- $Height = $image.Height -}}
+{{- if (default true .Page.Site.Params.imageProcessing.content.enabled) -}}
+	{{- $small := $image.Resize `480x` -}}
+	{{- $big := $image.Resize `1024x` -}}
+	{{- $Srcset = printf `%s 480w, %s 1024w` $small.RelPermalink $big.RelPermalink -}}
+{{- end -}}
+
+
+<img src="{{ $Permalink }}"
+	{{- with $Width -}} width="{{ . }}"{{- end -}}
+	{{- with $Height -}} height="{{ . }}"{{- end -}}
+	{{- with $Srcset -}} srcset="{{ . }}"{{- end -}}
+
+	loading="lazy"
+	class="gallery-image"
+	data-flex-grow="{{ div (mul $image.Width 100) $image.Height }}"
+	data-flex-basis="{{ div (mul $image.Width 240) $image.Height }}px"
+>

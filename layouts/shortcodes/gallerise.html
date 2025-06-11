@@ -1,0 +1,21 @@
+{{ $images := .Page.Resources.Match (.Get "images") }}
+
+{{ $groupSizes := slice 2 3 }}
+{{ $groupIndex := 0 }}
+{{ $i := 0 }}
+{{ $groupSize := index $groupSizes $groupIndex }}
+<p>
+{{ range $images }}
+    {{ if and .Name (not (strings.HasSuffix .Name ".zip")) }}
+        {{ partial "build_image.html" (dict "Path" .Name "Page" $.Page) }}
+        {{ $i = add $i 1 }}
+        {{ if eq $i $groupSize }}
+            </p>
+            <p>
+            {{ $groupIndex = mod (add $groupIndex 1) (len $groupSizes) }}
+            {{ $groupSize = index $groupSizes $groupIndex }}
+            {{ $i = 0 }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+</p>
