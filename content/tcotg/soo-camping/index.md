@@ -9,17 +9,9 @@ params:
         - 'Camping'
         - 'Touching Grass'
 keywords:
-    - ripple
-    - ripplefcl
-    - blog
-    - cursed
-    - human
-    - being
     - camping
     - outdoors
 ---
-
-# Preramble
 
 I recently went camping, had a great time enjoying the outdoors, and especially loved the BBQ and sitting around the fire.
 

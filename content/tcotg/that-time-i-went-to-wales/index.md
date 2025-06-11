@@ -6,18 +6,11 @@ Description: 'Wales you know'
 params:
     image: 'header.png'
     tags:
-        - 'replace_tag'
-
+        - 'Touching Grass'
 keywords:
-    - ripple
-    - ripplefcl
-    - blog
-    - cursed
-    - human
-    - being
+    - camping
+    - outdoors
 ---
-
-# Preramble
 
 I recently visited Wales. The scenery was impressive, with striking landscapes and plenty of interesting sights. It was a memorable trip.
 
