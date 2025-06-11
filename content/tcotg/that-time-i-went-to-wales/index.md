@@ -6,15 +6,11 @@ Description: 'Wales you know'
 params:
     image: 'header.png'
     tags:
-        - 'replace_tag'
-
+        - 'outdoors'
+        - 'camping'
 keywords:
-    - ripple
-    - ripplefcl
-    - blog
-    - cursed
-    - human
-    - being
+    - camping
+    - outdoors
 ---
 
 # Preramble
