@@ -101,9 +101,9 @@ def main(path: str, filetype: str, min_cols: int, max_cols: int, testrun: bool):
                         shutil.copy(file, new_file)
                         resize_compress_image(new_file.absolute(), 4000)
                         strip_exif = Path(__file__).parent / "strip_exif.sh"
-                        process = subprocess.run([str(strip_exif.absolute()), str(new_file.absolute())], check=True, shell=True)
+                        process = subprocess.run([str(strip_exif.absolute()), str(new_file.absolute())], check=True, capture_output=True)
                         if process.stdout:
-                            click.echo(process.stdout.decode('utf-8'))
+                            click.echo(f"Stripped exif from {new_file.name} with '{process.stdout.decode('utf-8').strip()}'")
                         else:
                             click.echo(f"Stripped exif {new_file.name} successfully.")
 
