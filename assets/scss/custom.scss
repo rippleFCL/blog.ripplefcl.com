@@ -1,0 +1,10 @@
+.article-content {
+    & > p.no-text {
+        margin: 0;
+    }
+}
+
+.gallery{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
