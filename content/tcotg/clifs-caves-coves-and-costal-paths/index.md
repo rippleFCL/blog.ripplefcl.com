@@ -6,7 +6,7 @@ Description: 'The time i ventured near the sea'
 params:
     image: 'header.jpg'
     tags:
-        - 'replace_tag'
+        - 'Touching Grass'
 keywords:
     - ripple
     - ripplefcl
